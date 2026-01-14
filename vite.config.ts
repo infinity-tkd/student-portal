@@ -26,17 +26,17 @@ export default defineConfig(({ mode }) => {
           orientation: 'portrait',
           icons: [
             {
-              src: 'https://drive.google.com/thumbnail?id=1432B55DpsWP6zQkhSWuDyVbVqF1t6tYM&sz=s700',
+              src: 'https://drive.google.com/thumbnail?id=1L2mH_O2UxPYEkQVsgzNdV4VhLS6hrIlQ&sz=s700',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: 'https://drive.google.com/thumbnail?id=1432B55DpsWP6zQkhSWuDyVbVqF1t6tYM&sz=s700',
+              src: 'https://drive.google.com/thumbnail?id=1L2mH_O2UxPYEkQVsgzNdV4VhLS6hrIlQ&sz=s700',
               sizes: '512x512',
               type: 'image/png'
             },
             {
-              src: 'https://drive.google.com/thumbnail?id=1432B55DpsWP6zQkhSWuDyVbVqF1t6tYM&sz=s700',
+              src: 'https://drive.google.com/thumbnail?id=1L2mH_O2UxPYEkQVsgzNdV4VhLS6hrIlQ&sz=s700',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
