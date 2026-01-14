@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Book, MapPin, Mail, ChevronRight, X, Heart, Download, Smartphone, Laptop, Share, PlusSquare, MoreVertical } from 'lucide-react';
+import { Shield, Book, MapPin, Mail, ChevronRight, X, Heart, Download, Smartphone, Laptop, Share, PlusSquare, MoreVertical, Globe } from 'lucide-react';
 
 const About: React.FC = () => {
   const [modalType, setModalType] = useState<'rules' | 'conduct' | 'download' | null>(null);
@@ -281,6 +281,16 @@ const About: React.FC = () => {
             </div>
             <div className="ml-auto text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-2 transition-all relative z-10"><ChevronRight size={20} /></div>
           </button>
+
+          <a href="https://infinity-tkd-web.vercel.app/" target="_blank" rel="noopener noreferrer" className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-violet-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
+            <div className="absolute right-0 top-0 w-32 h-32 bg-violet-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+            <div className="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-100 shadow-sm relative z-10 group-hover:bg-violet-600 group-hover:text-white transition-colors"><Globe size={28} /></div>
+            <div className="relative z-10">
+              <h3 className="text-lg font-black text-slate-800">Visit Website</h3>
+              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wide mt-1">Official Infinity TKD Site</p>
+            </div>
+            <div className="ml-auto text-slate-300 group-hover:text-violet-500 group-hover:translate-x-2 transition-all relative z-10"><ChevronRight size={20} /></div>
+          </a>
 
           <button onClick={handleInstallClick} className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
             <div className="absolute right-0 top-0 w-32 h-32 bg-slate-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
