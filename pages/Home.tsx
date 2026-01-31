@@ -184,7 +184,7 @@ const Home: React.FC = () => {
       <div className="animate-slide-up pb-10 space-y-8 md:p-4">
 
         {/* 1. PROFILE HEADER SECTION */}
-        <div className="px-6 pt-8 pb-8 text-center bg-gradient-to-b from-slate-50 via-white to-white rounded-b-[3.5rem] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] mx-auto max-w-2xl">
+        <div className="px-6 pt-8 pb-8 text-center bg-gradient-to-b from-slate-50 via-white to-white rounded-b-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] mx-auto max-w-2xl">
           <div className="relative inline-block group cursor-pointer">
             <div className="absolute -inset-4 bg-dark-blue/5 rounded-full scale-110 group-hover:scale-125 transition-transform duration-700"></div>
             {student.isScholarship && (
@@ -193,7 +193,7 @@ const Home: React.FC = () => {
 
             <img
               src={student.pic}
-              className="relative w-32 h-32 rounded-[3rem] mx-auto object-cover border-[5px] border-white shadow-2xl ring-1 ring-slate-100 group-hover:scale-105 transition-all duration-500"
+              className="relative w-32 h-32 rounded-2xl mx-auto object-cover border-[5px] border-white shadow-2xl ring-1 ring-slate-100 group-hover:scale-105 transition-all duration-500"
               alt={student.nameEN}
             />
 
@@ -229,7 +229,7 @@ const Home: React.FC = () => {
 
         {/* 2. DYNAMIC LEDGER CARD */}
         <div className="px-4 md:px-0">
-          <div onClick={() => setShowPaymentModal(true)} className={`${uiLedger.bg} rounded-[2.5rem] p-8 flex items-center justify-between shadow-xl shadow-current/20 relative overflow-hidden group cursor-pointer hover:scale-[1.01] transition-transform duration-300`}>
+          <div onClick={() => setShowPaymentModal(true)} className={`${uiLedger.bg} rounded-2xl p-8 flex items-center justify-between shadow-xl shadow-current/20 relative overflow-hidden group cursor-pointer hover:scale-[1.01] transition-transform duration-300`}>
 
             <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:left-[100%] transition-all duration-1000 ease-in-out"></div>
 
@@ -255,7 +255,7 @@ const Home: React.FC = () => {
         {/* 3. RANK & GRADUATION GRID */}
         <div className="px-4 md:px-0 grid grid-cols-2 gap-4">
 
-          <div onClick={() => setShowRankModal(true)} className="col-span-1 bg-[#131950] rounded-[2.5rem] p-6 shadow-xl shadow-[#131950]/20 text-white relative overflow-hidden group cursor-pointer active:scale-95 transition-transform duration-200">
+          <div onClick={() => setShowRankModal(true)} className="col-span-1 bg-[#131950] rounded-2xl p-6 shadow-xl shadow-[#131950]/20 text-white relative overflow-hidden group cursor-pointer active:scale-95 transition-transform duration-200">
             <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-bl-[4rem] transition-all duration-500 group-hover:scale-110"></div>
             <Award className="absolute -right-2 -bottom-2 w-24 h-24 opacity-10 group-hover:rotate-12 transition-transform duration-700" />
 
@@ -274,7 +274,7 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div onClick={() => setShowGradModal(true)} className="col-span-1 bg-white border border-slate-100 rounded-[2.5rem] p-6 shadow-sm flex flex-col justify-between hover:border-slate-200 transition-colors cursor-pointer active:scale-95 group">
+          <div onClick={() => setShowGradModal(true)} className="col-span-1 bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex flex-col justify-between hover:border-slate-200 transition-colors cursor-pointer active:scale-95 group">
             <div className="flex justify-between items-start">
               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Graduation</p>
               <GraduationCap className="text-slate-200 w-6 h-6 group-hover:text-emerald-400 transition-colors duration-300" />
@@ -314,7 +314,7 @@ const Home: React.FC = () => {
       {showPaymentModal && (
         <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6 animate-fade-in">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowPaymentModal(false)}></div>
-          <div className="bg-white w-full md:max-w-2xl md:rounded-[3rem] rounded-t-[2.5rem] overflow-hidden shadow-2xl relative z-10 animate-slide-up-modal flex flex-col max-h-[90vh]">
+          <div className="bg-white w-full md:max-w-2xl md:rounded-3xl rounded-t-3xl overflow-hidden shadow-2xl relative z-10 animate-slide-up-modal flex flex-col max-h-[90vh]">
 
             <div className="p-8 pb-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
               <div>
@@ -387,7 +387,7 @@ const Home: React.FC = () => {
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowRankModal(false)}></div>
 
-          <div className="bg-white w-full max-w-md rounded-t-[2.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl relative z-10 animate-slide-up">
+          <div className="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl relative z-10 animate-slide-up">
             <div className={`p-8 text-center relative overflow-hidden transition-colors duration-500 ${getBeltColorClass(student.belt)}`}>
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-[100%]"></div>
               <Award className="absolute -left-4 top-4 w-24 h-24 text-white/5 -rotate-12" />
@@ -446,7 +446,7 @@ const Home: React.FC = () => {
       {showGradModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setShowGradModal(false)}></div>
-          <div className="bg-white w-full max-w-sm rounded-[2.5rem] p-8 text-center relative z-10 animate-slide-up shadow-2xl">
+          <div className="bg-white w-full max-w-sm rounded-2xl p-8 text-center relative z-10 animate-slide-up shadow-2xl">
             <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 ${student.eligible === 'YES' ? 'bg-emerald-50 text-emerald-500' : 'bg-slate-50 text-slate-400'}`}>
               <GraduationCap size={32} />
             </div>
@@ -465,7 +465,7 @@ const Home: React.FC = () => {
       {showPaymentModal && (
         <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center md:p-6 animate-fade-in">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowPaymentModal(false)}></div>
-          <div className="bg-white w-full md:max-w-2xl md:rounded-[3rem] rounded-t-[2.5rem] overflow-hidden shadow-2xl relative z-10 animate-slide-up-modal flex flex-col max-h-[90vh]">
+          <div className="bg-white w-full md:max-w-2xl md:rounded-3xl rounded-t-3xl overflow-hidden shadow-2xl relative z-10 animate-slide-up-modal flex flex-col max-h-[90vh]">
 
             <div className={`p-8 pb-4 border-b flex justify-between items-center ${activeTheme.isPremium ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-100'}`}>
               <div>
@@ -523,7 +523,7 @@ const Home: React.FC = () => {
                   }
 
                   return (
-                    <div key={m} className={`relative p-4 rounded-3xl border transition-all duration-300 ${containerClass}`}>
+                    <div key={m} className={`relative p-4 rounded-xl border transition-all duration-300 ${containerClass}`}>
                       <div className="flex justify-between items-start mb-2">
                         <span className={`text-xs font-black uppercase tracking-wider mix-blend-multiply ${isPrem ? 'text-slate-500 mix-blend-normal' : 'text-slate-400'}`}>{m.substring(0, 3)}</span>
                         {isPaid ? (
@@ -560,7 +560,7 @@ const Home: React.FC = () => {
 };
 
 const InfoRow = ({ label, value, icon: Icon }: any) => (
-  <div className="group flex items-center gap-5 p-4 bg-white border border-slate-50 rounded-[2rem] shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] hover:shadow-md hover:border-slate-200 hover:-translate-y-0.5 transition-all duration-300">
+  <div className="group flex items-center gap-5 p-4 bg-white border border-slate-50 rounded-xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] hover:shadow-md hover:border-slate-200 hover:-translate-y-0.5 transition-all duration-300">
     <div className="w-12 h-12 bg-slate-50 group-hover:bg-white group-hover:text-dark-blue flex items-center justify-center rounded-2xl text-slate-400 transition-colors duration-300">
       <Icon size={18} />
     </div>

@@ -108,7 +108,7 @@ const Achievements: React.FC = () => {
 
         {/* Stats Rail */}
         <div className="flex gap-4 px-4 md:px-0 overflow-x-auto no-scrollbar pb-2">
-          <div className="flex-1 min-w-[100px] bg-[#0f172a] rounded-2xl p-4 text-white relative overflow-hidden group">
+          <div className="flex-1 min-w-[100px] bg-[#131950] rounded-xl p-4 text-white relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-colors"></div>
             <p className="text-[9px] font-black uppercase tracking-widest opacity-60 mb-1">Total Awards</p>
             <p className="text-3xl font-black">{stats.total}</p>
@@ -125,7 +125,7 @@ const Achievements: React.FC = () => {
               key={type}
               onClick={() => setFilterMedal(type)}
               className={`px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${filterMedal === type
-                ? 'bg-[#0f172a] text-white shadow-lg shadow-slate-900/10 scale-105'
+                ? 'bg-[#131950] text-white shadow-lg shadow-blue-900/10 scale-105'
                 : 'bg-white text-slate-400 border border-slate-200 hover:border-slate-300 hover:text-slate-600'
                 }`}
             >
@@ -137,7 +137,7 @@ const Achievements: React.FC = () => {
         {/* Achievements List */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-4 md:px-0">
           {filteredAndSorted.length === 0 ? (
-            <div className="col-span-full py-20 text-center text-slate-400 bg-white rounded-[2rem] border-2 border-dashed border-slate-100">
+            <div className="col-span-full py-20 text-center text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-100">
               <Trophy size={40} className="mx-auto mb-3 opacity-20" />
               <p className="text-xs font-black uppercase tracking-widest">No awards found</p>
             </div>
@@ -150,11 +150,11 @@ const Achievements: React.FC = () => {
               <div
                 key={item.id}
                 onClick={() => setSelected(item)}
-                className="group bg-white rounded-[2rem] p-5 flex items-center gap-5 cursor-pointer border border-slate-100 transition-all duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-slate-900/5 hover:-translate-y-1 animate-slide-up"
+                className="group bg-white rounded-xl p-5 flex items-center gap-5 cursor-pointer border border-slate-100 transition-all duration-300 hover:border-amber-200 hover:shadow-xl hover:shadow-slate-900/5 hover:-translate-y-1 animate-slide-up"
                 style={{ animationDelay: `${idx * 50}ms` }}
               >
                 {/* Medal Icon */}
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 bg-gradient-to-br ${style.gradient} shadow-lg shadow-slate-200 font-bold text-white text-xl relative overflow-hidden group-hover:scale-110 transition-transform duration-500`}>
+                <div className={`w-16 h-16 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${style.gradient} shadow-lg shadow-slate-200 font-bold text-white text-xl relative overflow-hidden group-hover:scale-110 transition-transform duration-500`}>
                   <div className="absolute inset-0 bg-white/20 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <Award size={28} className="relative z-10 drop-shadow-md" />
                 </div>
@@ -180,7 +180,7 @@ const Achievements: React.FC = () => {
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 backdrop-blur-sm bg-slate-900/60 animate-fade-in">
           <div className="absolute inset-0" onClick={() => setSelected(null)}></div>
 
-          <div className="bg-white w-full sm:max-w-lg rounded-t-[2rem] sm:rounded-[2rem] overflow-hidden shadow-2xl relative z-10 animate-slide-up max-h-[85vh] flex flex-col transition-all">
+          <div className="bg-white w-full sm:max-w-lg rounded-t-xl sm:rounded-xl overflow-hidden shadow-2xl relative z-10 animate-slide-up max-h-[85vh] flex flex-col transition-all">
 
             {/* Header / Hero with Dynamic Glow */}
             <div className="relative p-8 pb-6 shrink-0 bg-slate-50 flex flex-col items-center border-b border-slate-100 overflow-hidden">
@@ -192,13 +192,13 @@ const Achievements: React.FC = () => {
               {/* Animated Medal Circle */}
               <div className="relative mb-4 group">
                 {/* Pulse Effect */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-tr ${getMedalStyle(selected.medal).gradient} blur-lg opacity-40 animate-pulse`}></div>
+                <div className={`absolute inset-0 rounded-xl bg-gradient-to-tr ${getMedalStyle(selected.medal).gradient} blur-lg opacity-40 animate-pulse`}></div>
 
-                <div className={`relative w-24 h-24 rounded-2xl flex items-center justify-center bg-white border-2 ${getMedalStyle(selected.medal).border} shadow-xl shadow-slate-200 transform group-hover:scale-105 transition-transform duration-500`}>
+                <div className={`relative w-24 h-24 rounded-xl flex items-center justify-center bg-white border-2 ${getMedalStyle(selected.medal).border} shadow-xl shadow-slate-200 transform group-hover:scale-105 transition-transform duration-500`}>
                   <Award size={48} className={`${getMedalStyle(selected.medal).text} drop-shadow-sm`} />
 
                   {/* Shimmer Overlay */}
-                  <div className="absolute inset-0 rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0 rounded-xl overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer"></div>
                   </div>
                 </div>
@@ -227,7 +227,7 @@ const Achievements: React.FC = () => {
               {/* Judge's Feedback with Gold tint */}
               {selected.notes && (
                 <div className="relative group">
-                  <div className="bg-amber-50/50 p-6 rounded-2xl border border-amber-100 relative overflow-hidden transition-colors hover:bg-amber-50">
+                  <div className="bg-amber-50/50 p-6 rounded-xl border border-amber-100 relative overflow-hidden transition-colors hover:bg-amber-50">
                     {/* Decorative Quote Icon Background */}
                     <Quote size={80} className="absolute -right-4 -bottom-4 text-amber-500/10 rotate-12" />
 
@@ -257,14 +257,14 @@ const Achievements: React.FC = () => {
 
 // Helper Components
 const StatItem = ({ label, count, color, bg }: any) => (
-  <div className={`flex-1 min-w-[100px] rounded-2xl p-4 flex flex-col justify-center border border-slate-100 ${bg}`}>
+  <div className={`flex-1 min-w-[100px] rounded-xl p-4 flex flex-col justify-center border border-slate-100 ${bg}`}>
     <p className="text-[9px] font-black uppercase tracking-widest opacity-50 mb-1">{label}</p>
     <p className={`text-2xl font-black ${color}`}>{count}</p>
   </div>
 );
 
 const DetailBox = ({ label, value, icon: Icon }: any) => (
-  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-3 text-center flex flex-col items-center justify-center">
+  <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-center flex flex-col items-center justify-center">
     <Icon size={14} className="text-slate-400 mb-2" />
     <p className="text-[9px] font-black uppercase text-slate-400 tracking-widest mb-0.5">{label}</p>
     <p className="text-xs font-bold text-slate-800 leading-tight line-clamp-1 w-full">{value}</p>

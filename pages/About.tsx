@@ -151,8 +151,8 @@ const About: React.FC = () => {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setModalType(null)}></div>
-        <div className="bg-white w-full max-w-2xl h-[80vh] rounded-[2.5rem] shadow-2xl relative z-10 flex flex-col border border-slate-100 animate-slide-up">
-          <div className="flex items-center justify-between p-6 border-b border-slate-50 sticky top-0 bg-white rounded-t-[2.5rem] z-20">
+        <div className="bg-white w-full max-w-2xl h-[80vh] rounded-2xl shadow-2xl relative z-10 flex flex-col border border-slate-100 animate-slide-up">
+          <div className="flex items-center justify-between p-6 border-b border-slate-50 sticky top-0 bg-white rounded-t-2xl z-20">
             <div className="flex items-center gap-4">
               <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ${isRules ? 'bg-blue-50 text-blue-600' : 'bg-emerald-50 text-emerald-600'}`}>
                 {isRules ? <Shield size={24} /> : <Book size={24} />}
@@ -262,7 +262,7 @@ const About: React.FC = () => {
         </div>
 
         <div className="px-4 md:px-0 max-w-xl mx-auto mb-10 space-y-4">
-          <button onClick={() => setModalType('rules')} className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
+          <button onClick={() => setModalType('rules')} className="group w-full bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
             <div className="absolute right-0 top-0 w-32 h-32 bg-blue-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
             <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100 shadow-sm relative z-10 group-hover:bg-blue-600 group-hover:text-white transition-colors"><Shield size={28} /></div>
             <div className="relative z-10">
@@ -272,7 +272,7 @@ const About: React.FC = () => {
             <div className="ml-auto text-slate-300 group-hover:text-blue-500 group-hover:translate-x-2 transition-all relative z-10"><ChevronRight size={20} /></div>
           </button>
 
-          <button onClick={() => setModalType('conduct')} className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-emerald-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
+          <button onClick={() => setModalType('conduct')} className="group w-full bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-emerald-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
             <div className="absolute right-0 top-0 w-32 h-32 bg-emerald-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
             <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 shadow-sm relative z-10 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><Book size={28} /></div>
             <div className="relative z-10">
@@ -282,7 +282,7 @@ const About: React.FC = () => {
             <div className="ml-auto text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-2 transition-all relative z-10"><ChevronRight size={20} /></div>
           </button>
 
-          <a href="https://infinity-tkd-web.vercel.app/" target="_blank" rel="noopener noreferrer" className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-violet-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
+          <a href="https://infinity-tkd-web.vercel.app/" target="_blank" rel="noopener noreferrer" className="group w-full bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-violet-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
             <div className="absolute right-0 top-0 w-32 h-32 bg-violet-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
             <div className="w-14 h-14 rounded-2xl bg-violet-50 text-violet-600 flex items-center justify-center shrink-0 border border-violet-100 shadow-sm relative z-10 group-hover:bg-violet-600 group-hover:text-white transition-colors"><Globe size={28} /></div>
             <div className="relative z-10">
@@ -292,7 +292,7 @@ const About: React.FC = () => {
             <div className="ml-auto text-slate-300 group-hover:text-violet-500 group-hover:translate-x-2 transition-all relative z-10"><ChevronRight size={20} /></div>
           </a>
 
-          <button onClick={handleInstallClick} className="group w-full bg-white border border-slate-100 rounded-[2rem] p-5 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
+          <button onClick={handleInstallClick} className="group w-full bg-white border border-slate-100 rounded-xl p-5 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all flex items-center gap-5 text-left relative overflow-hidden active:scale-[0.98]">
             <div className="absolute right-0 top-0 w-32 h-32 bg-slate-50 rounded-bl-[100px] -mr-6 -mt-6 opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
             <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100 shadow-sm relative z-10 group-hover:bg-blue-600 group-hover:text-white transition-colors"><Download size={28} /></div>
             <div className="relative z-10">
@@ -303,7 +303,7 @@ const About: React.FC = () => {
           </button>
         </div>
 
-        <div className="mx-4 md:mx-auto max-w-xl bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 space-y-6">
+        <div className="mx-4 md:mx-auto max-w-xl bg-slate-50 p-8 rounded-2xl border border-slate-100 space-y-6">
           <div className="flex items-start gap-5">
             <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-dark-blue shadow-sm shrink-0 border border-slate-100"><MapPin size={20} /></div>
             <div>

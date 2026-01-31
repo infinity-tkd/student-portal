@@ -40,6 +40,8 @@ export interface Promotion {
   rank: string;
   date: string;
   result: string;
+  certificateId?: string;
+  certificateFileId?: string;
 }
 
 export interface EventItem {

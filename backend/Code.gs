@@ -1,23 +1,31 @@
-/**
- * BACKEND CODE - Google Apps Script
- *
- * INSTRUCTIONS:
- * 1. Copy ALL content below.
- * 2. Paste into Code.gs in your Google Apps Script project.
- * 3. Deploy > New deployment > Web App > "Me" / "Anyone" > Deploy.
- */
-
 // ==========================================
 // 1. SHEET AUTOMATION (Original Logic)
 // ==========================================
 
+/**
+ * MAIN TRIGGER: Routes edits to the correct logic based on Sheet Name
+ */
 function onEdit(e) {
-  const tracker = "Payment_Tracker";
-  const dataSheetName = "Payments_Data";
-
   const sheet = e.source.getActiveSheet();
-  if (sheet.getName() !== tracker) return;
+  const sheetName = sheet.getName();
 
+  // --- FEATURE 1: PAYMENT TRACKER LOGIC ---
+  if (sheetName === "Payment_Tracker") {
+    processPaymentTracker(e, sheet);
+  } 
+  
+  // --- FEATURE 2: BELT HISTORY LOGIC (NEW) ---
+  else if (sheetName === "Belt History") {
+    processBeltHistory(e, sheet);
+  }
+}
+
+/** ------------------------------------------------------------------
+ * FEATURE 1: PAYMENT TRACKER FUNCTIONS (Your original code)
+ * ------------------------------------------------------------------
+ */
+function processPaymentTracker(e, sheet) {
+  const dataSheetName = "Payments_Data";
   const row = e.range.getRow();
   const col = e.range.getColumn();
   const ss = SpreadsheetApp.getActive();
@@ -93,6 +101,123 @@ function loadYearData() {
   }
 }
 
+/** ------------------------------------------------------------------
+ * FEATURE 2: BELT HISTORY AUTOMATION (New)
+ * ------------------------------------------------------------------
+ */
+function processBeltHistory(e, sheet) {
+  const row = e.range.getRow();
+  
+  // Skip headers (Row 1)
+  if (row < 2) return; 
+
+  // Read the edited row (Columns A to F)
+  // A=ID(0), B=Belt(1), C=Date(2), D=Result(3), F=CertID(5)
+  // We grab range A:F for this row
+  const range = sheet.getRange(row, 1, 1, 6);
+  const data = range.getValues()[0];
+
+  const studentID = data[0];
+  const belt = data[1];
+  const promoDate = data[2]; // Object or String
+  const currentCertID = data[5]; // Column F
+
+  // Check if we have essential data AND Cert ID is still empty
+  // We only run this if ID, Belt, and Date are present
+  if (studentID && belt && promoDate && currentCertID === "") {
+    
+    // Generate the ID
+    const newID = generateOneCertID(studentID, belt, promoDate);
+    
+    // Write it to Column F (Index 6)
+    sheet.getRange(row, 6).setValue(newID);
+  }
+}
+
+// --- HELPER FUNCTIONS FOR CERTIFICATES ---
+
+function generateOneCertID(studentID, belt, promoDate) {
+  // 1. Get Belt Code (X1)
+  const beltCode = getBeltCode(belt);
+  
+  // 2. Get Gender Code (X2) from Student ID (STU-F-xxx)
+  let genderCode = "M"; 
+  const parts = studentID.toString().split("-");
+  if (parts.length >= 2) {
+    genderCode = parts[1]; 
+  }
+
+  // 3. Get Year (YYYY)
+  const dateObj = new Date(promoDate);
+  const year = dateObj.getFullYear();
+
+  // 4. Generate Unique 10-digit ID [0-9][A-Z]
+  const uniqueID = generateRandomString(10);
+
+  // Return Format: CERT-X1-X2-Unique-Year
+  return "CERT-" + beltCode + "-" + genderCode + "-" + uniqueID + "-" + year;
+}
+
+function getBeltCode(beltName) {
+  const b = beltName.toString().trim().toLowerCase();
+  if (b.includes("yellow")) return "Y";
+  if (b.includes("green")) return "G";
+  if (b.includes("blue")) return "BL";   
+  if (b.includes("brown")) return "BR";  
+  if (b.includes("red")) return "R";
+  if (b.includes("white")) return "W";
+  if (b.includes("black") || b.includes("poom") || b.includes("dan")) return "BK";
+  return "X"; // Unknown
+}
+
+function generateRandomString(length) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+/** ------------------------------------------------------------------
+ * ADMIN MENU (Optional: For bulk generating old rows)
+ * ------------------------------------------------------------------
+ */
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('Infinity Admin')
+      .addItem('Generate Missing Cert IDs (Bulk)', 'generateBulkCertIDs')
+      .addToUi();
+}
+
+function generateBulkCertIDs() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Belt History");
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) return;
+
+  const range = sheet.getRange(2, 1, lastRow - 1, 6); // A to F
+  const data = range.getValues();
+  let updates = false;
+
+  for (let i = 0; i < data.length; i++) {
+    const studentID = data[i][0];
+    const belt = data[i][1];
+    const promoDate = data[i][2];
+    const certID = data[i][5];
+
+    if (studentID && belt && promoDate && certID === "") {
+      data[i][5] = generateOneCertID(studentID, belt, promoDate);
+      updates = true;
+    }
+  }
+
+  if (updates) {
+    range.setValues(data);
+    SpreadsheetApp.getUi().alert("Generated IDs for all missing rows.");
+  } else {
+    SpreadsheetApp.getUi().alert("All rows already have IDs.");
+  }
+}
 // ==========================================
 // 2. API LOGIC (Single-Fetch Architecture)
 // ==========================================
@@ -103,6 +228,11 @@ function doPost(e) {
     var action = params.action;
     var data = null;
 
+    // ROUTING
+    if (action.startsWith('admin')) {
+      return AdminBackend.dispatch(action, params);
+    }
+    
     switch (action) {
       case 'login':
         // CRITICAL: Now returns EVERYTHING needed for the app
@@ -347,7 +477,9 @@ function getHistory(studentId) {
     studentId: row[0],
     rank: row[1], 
     date: row[2], 
-    result: row[3] 
+    result: row[3],
+    certificateId: row[5] || "",
+    certificateFileId: row[6] || ""
   }));
 }
 

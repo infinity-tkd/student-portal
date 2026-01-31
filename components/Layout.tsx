@@ -104,7 +104,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         {/* Mobile Bottom Navigation (Floating Island Style) */}
         <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-          <nav className="bg-[#131950]/90 backdrop-blur-xl rounded-[2rem] px-5 py-3 shadow-2xl shadow-blue-900/30 flex items-center gap-1 pointer-events-auto border border-white/10 max-w-sm w-full justify-between">
+          <nav className="bg-[#131950]/90 backdrop-blur-xl rounded-2xl px-5 py-3 shadow-2xl shadow-blue-900/30 flex items-center gap-1 pointer-events-auto border border-white/10 max-w-sm w-full justify-between">
             <MobileNavItem path="/" icon={LayoutDashboard} isActive={isActive('/')} onClick={() => navigate('/')} />
             <MobileNavItem path="/events" icon={CalendarRange} isActive={isActive('/events')} onClick={() => navigate('/events')} />
             <MobileNavItem path="/attendance" icon={ClipboardList} isActive={isActive('/attendance')} onClick={() => navigate('/attendance')} />
@@ -119,7 +119,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {showLogoutModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity" onClick={() => setShowLogoutModal(false)}></div>
-          <div className="bg-white w-full max-w-sm rounded-[2.5rem] p-8 text-center relative z-10 animate-slide-up shadow-2xl">
+          <div className="bg-white w-full max-w-sm rounded-2xl p-8 text-center relative z-10 animate-slide-up shadow-2xl">
             <div className="w-20 h-20 mx-auto rounded-full bg-red-50 text-red-500 flex items-center justify-center mb-6 shadow-sm">
               <LogOut size={32} />
             </div>

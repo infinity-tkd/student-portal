@@ -57,7 +57,7 @@ const Events: React.FC = () => {
               </button>
               <button
                 onClick={() => setFilterType('open')}
-                className={`flex-1 px-6 py-2.5 rounded-lg text-[10px] font-black tracking-wide transition-all duration-300 ${filterType === 'open' ? 'bg-[#0f172a] text-amber-400 shadow-lg shadow-slate-900/20 transform scale-105' : 'text-slate-400 hover:text-slate-600'}`}
+                className={`flex-1 px-6 py-2.5 rounded-lg text-[10px] font-black tracking-wide transition-all duration-300 ${filterType === 'open' ? 'bg-[#131950] text-white shadow-lg shadow-blue-900/20 transform scale-105' : 'text-slate-400 hover:text-slate-600'}`}
               >
                 Open
               </button>
@@ -70,7 +70,7 @@ const Events: React.FC = () => {
             <div className="w-12 h-12 border-4 border-slate-200 border-t-amber-500 rounded-full animate-spin"></div>
           </div>
         ) : filteredEvents.length === 0 ? (
-          <div className="text-center py-32 bg-white rounded-[2rem] border-2 border-dashed border-slate-100 mx-4 md:mx-0">
+          <div className="text-center py-32 bg-white rounded-2xl border-2 border-dashed border-slate-100 mx-4 md:mx-0">
             <CalendarDays size={48} className="mx-auto mb-4 text-slate-200" />
             <h3 className="text-lg font-black text-slate-400 uppercase tracking-widest">No matching events</h3>
           </div>
@@ -89,11 +89,11 @@ const Events: React.FC = () => {
                 <div
                   key={evt.id}
                   onClick={() => setSelectedEvent(evt)}
-                  className="group bg-white rounded-2xl p-4 flex items-center gap-5 cursor-pointer border border-slate-100 transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:shadow-slate-900/5 hover:-translate-y-0.5 animate-slide-up"
+                  className="group bg-white rounded-xl p-4 flex items-center gap-5 cursor-pointer border border-slate-100 transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:shadow-slate-900/5 hover:-translate-y-0.5 animate-slide-up"
                   style={{ animationDelay: `${idx * 50}ms` }}
                 >
                   {/* Compact Date Box */}
-                  <div className={`w-16 h-16 rounded-xl flex flex-col items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-[#0f172a] text-white' : 'bg-slate-50 text-slate-400'}`}>
+                  <div className={`w-16 h-16 rounded-lg flex flex-col items-center justify-center shrink-0 transition-colors ${isOpen ? 'bg-[#131950] text-white' : 'bg-slate-50 text-slate-400'}`}>
                     <span className="text-[9px] font-black uppercase tracking-widest opacity-60 leading-none mb-0.5">{month}</span>
                     <span className="text-xl font-black leading-none">{day}</span>
                   </div>
@@ -135,7 +135,7 @@ const Events: React.FC = () => {
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedEvent(null)}></div>
 
-          <div className="bg-white w-full sm:max-w-xl rounded-t-[2rem] sm:rounded-[2rem] overflow-hidden shadow-2xl relative z-10 animate-slide-up flex flex-col max-h-[85vh]">
+          <div className="bg-white w-full sm:max-w-xl rounded-t-xl sm:rounded-xl overflow-hidden shadow-2xl relative z-10 animate-slide-up flex flex-col max-h-[85vh]">
 
             {/* Header / Hero */}
             <div className="relative p-8 pb-4 shrink-0">
@@ -181,8 +181,8 @@ const Events: React.FC = () => {
               </div>
 
               {/* Registration Box */}
-              <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-5 rounded-2xl border border-blue-100 flex gap-4 items-start">
-                <div className="w-10 h-10 rounded-xl bg-white text-blue-600 flex items-center justify-center shrink-0 shadow-sm border border-blue-50">
+              <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-5 rounded-xl border border-blue-100 flex gap-4 items-start">
+                <div className="w-10 h-10 rounded-lg bg-white text-blue-600 flex items-center justify-center shrink-0 shadow-sm border border-blue-50">
                   <AlertCircle size={20} />
                 </div>
                 <div>
@@ -200,7 +200,7 @@ const Events: React.FC = () => {
               <button
                 disabled={selectedEvent.status !== 'Open'}
                 onClick={() => setSelectedEvent(null)}
-                className={`w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 ${selectedEvent.status === 'Open' ? 'bg-[#0f172a] text-white shadow-slate-900/10 hover:shadow-slate-900/20 hover:-translate-y-0.5' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}`}
+                className={`w-full py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 ${selectedEvent.status === 'Open' ? 'bg-[#131950] text-white shadow-blue-900/10 hover:shadow-blue-900/20 hover:-translate-y-0.5' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}`}
               >
                 {selectedEvent.status === 'Open' ? (
                   <>Confirm Registration <ChevronRight size={14} /></>
