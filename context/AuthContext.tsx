@@ -9,7 +9,8 @@ interface DataContextType {
   isLoading: boolean;
   login: (id: string, pass: string, remember: boolean) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
-  refreshData: () => Promise<void>; // Optional refetch
+  refreshData: () => Promise<void>;
+  isSyncing: boolean;
 }
 
 const DataContext = createContext<DataContextType>(null!);
@@ -39,6 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // If we have data, we are NOT loading. We show app immediately.
   const [isLoading, setIsLoading] = useState(() => !data); // Dependent on initial data
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const login = async (id: string, pass: string, remember: boolean) => {
     setIsLoading(true);
@@ -62,48 +64,71 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const refreshData = async () => {
+    const savedCreds = secureStorage.getItem('app_creds');
+    if (!savedCreds || !savedCreds.id || !savedCreds.pass) return;
+    
+    setIsSyncing(true);
+    try {
+      const res = await api.login(savedCreds.id, savedCreds.pass);
+      if (res.success && res.data) {
+        setData(res.data);
+        secureStorage.setItem('app_data', res.data, true);
+      }
+    } catch (err) {
+      console.error("Background sync failed", err);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   useEffect(() => {
     const initAuth = async () => {
-      // 1. Background Revalidation (Auto-Login) even if data exists
       const savedCreds = secureStorage.getItem('app_creds');
       if (savedCreds && savedCreds.id && savedCreds.pass) {
-        console.log("Attempting background refresh...");
-        try {
-          // Silent Login
-          const res = await api.login(savedCreds.id, savedCreds.pass);
-          if (res.success && res.data) {
-            console.log("Background refresh success");
-            setData(res.data);
-            secureStorage.setItem('app_data', res.data, true); // Update cache
-            setIsLoading(false);
-          }
-        } catch (err) {
-          console.error("Background refresh failed", err);
-          setIsLoading(false); // Ensure we stop loading if refresh fails
-        }
+        if (!data) setIsLoading(true);
+        await refreshData();
+        setIsLoading(false);
       } else {
-        // No creds? If we have data, we are good. If no data, we stop loading to show login.
-        if (isLoading) setIsLoading(false);
+        setIsLoading(false);
       }
     };
 
     initAuth();
-  }, []);
+
+    // SWR: Focus-based revalidation
+    const handleFocus = () => {
+      if (!isSyncing) refreshData();
+    };
+    
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') handleFocus();
+    };
+
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleFocus);
+
+    // SWR: Interval-based revalidation (5 minutes)
+    const intervalId = setInterval(() => {
+      if (!isSyncing) refreshData();
+    }, 300000);
+
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+      clearInterval(intervalId);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const logout = () => {
     setData(null);
     secureStorage.clearAll();
-    // Explicitly remove credentials to stop auto-login
     secureStorage.removeItem('app_creds');
     secureStorage.removeItem('app_data');
   };
 
-  const refreshData = async () => {
-    // Optional: Re-fetch logic if needed later
-  };
-
   return (
-    <DataContext.Provider value={{ data, login, logout, isLoading, refreshData }}>
+    <DataContext.Provider value={{ data, login, logout, isLoading, refreshData, isSyncing }}>
       {children}
     </DataContext.Provider>
   );
